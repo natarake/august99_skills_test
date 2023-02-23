@@ -18,7 +18,7 @@ function Flight() {
   }, [id]);
 
   return (
-    <div className="bg-white shadow-xl p-4">
+    <div className="bg-white shadow-xl p-4 w-[500px]">
       <div className="relative">
         <div className="text-xl font-bold">{flight.mission_name}</div>
         <div className="absolute -top-1 left-[25%] text-xs bg-cyan-300 px-1 font-medium">
