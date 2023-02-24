@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 
 function Cards({ detail }) {
-  console.log(detail);
   return (
     <div className="w-full p-4 bg-white shadow-2xl rounded-md border border-grey-50">
       <div className="relative my-2">

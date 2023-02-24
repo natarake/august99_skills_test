@@ -1,19 +1,35 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import axios from "axios";
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import axios from "axios";
 import Flight from "./pages/Flight";
+import Home from "./pages/Home";
 
 function App() {
   const [details, setDetails] = useState([]);
+  const [offset, setOffset] = useState(0);
   const [searchTerm, setSearchTerm] = useState("");
-  const url = "https://api.spacexdata.com/v3/launches?limit=10";
+  const [loading, setLoading] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const url = `https://api.spacexdata.com/v3/launches?limit=10&offset=${offset}`;
+  const isEmpty = !details || details.length === 0;
+  let totalCount = 50;
 
-  const Home = lazy(() => import("./pages/Home"));
+  const fetchData = async () => {
+    setLoading(true);
+    const res = await axios.get(url);
+    if (res && res.data) {
+      const newDetails = [...details, ...res.data];
+      if (newDetails.length >= totalCount) {
+        setHasMore(false);
+      }
+      setDetails(newDetails);
+      setOffset((prev) => prev + 10);
+    }
+    setLoading(false);
+  };
 
   useEffect(() => {
-    axios.get(url).then((res) => {
-      setDetails(res.data);
-    });
+    fetchData();
   }, []);
 
   return (
@@ -25,12 +41,22 @@ function App() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
       />
-      <Suspense fallback={<h1>Loading...</h1>}>
-        <Routes>
-          <Route path="/" element={<Home details={details} />} />
-          <Route path="/:id" element={<Flight />} />
-        </Routes>
-      </Suspense>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              details={details}
+              loading={loading}
+              hasMore={hasMore}
+              fetchData={fetchData}
+              isEmpty={isEmpty}
+              totalCount={totalCount}
+            />
+          }
+        />
+        <Route path="/:id" element={<Flight />} />
+      </Routes>
     </div>
   );
 }
