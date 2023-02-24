@@ -4,7 +4,7 @@ import EndMessage from "../components/EndMessage";
 import InfiniteScroll from "react-infinite-scroller";
 
 function Home({ details, hasMore, fetchData, isEmpty, totalCount }) {
-  console.log(details.length);
+  console.log(details);
   return (
     <div className="p-4 flex flex-col items-center justify-center w-full gap-4">
       <InfiniteScroll
