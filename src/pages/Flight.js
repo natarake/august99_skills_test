@@ -9,8 +9,6 @@ function Flight() {
   const [flight, setFlight] = useState({});
   const url = "https://api.spacexdata.com/v3/launches/";
 
-  console.log(flight);
-
   useEffect(() => {
     axios.get(url + id).then((res) => {
       setFlight(res.data);
@@ -18,7 +16,7 @@ function Flight() {
   }, [id]);
 
   return (
-    <div className="bg-white shadow-xl p-4 w-[500px]">
+    <div className="bg-white shadow-xl p-4 w-full">
       <div className="relative">
         <div className="text-xl font-bold">{flight.mission_name}</div>
         <div className="absolute -top-1 left-[25%] text-xs bg-cyan-300 px-1 font-medium">

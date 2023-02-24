@@ -3,8 +3,7 @@ import Spinner from "../components/Spinner/Spinner";
 import EndMessage from "../components/EndMessage";
 import InfiniteScroll from "react-infinite-scroller";
 
-function Home({ details, hasMore, fetchData, isEmpty, totalCount }) {
-  console.log(details);
+function Home({ details, hasMore, isEmpty, totalCount, fetchData }) {
   return (
     <div className="p-4 flex flex-col items-center justify-center w-full gap-4">
       <InfiniteScroll
@@ -17,7 +16,9 @@ function Home({ details, hasMore, fetchData, isEmpty, totalCount }) {
         className="w-full flex flex-col gap-2"
       >
         {!isEmpty &&
-          details.map((detail, index) => <Cards detail={detail} key={index} />)}
+          details?.map((detail, index) => (
+            <Cards detail={detail} key={index} />
+          ))}
       </InfiniteScroll>
       {details.length >= totalCount && <EndMessage />}
     </div>

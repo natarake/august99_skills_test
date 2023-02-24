@@ -28,6 +28,18 @@ function App() {
     setLoading(false);
   };
 
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    if (e.key === "Enter") {
+      const res = await axios.get(
+        `https://api.spacexdata.com/v3/launches?mission_name=${searchTerm}`
+      );
+      setDetails(res.data);
+      setLoading(false);
+      setSearchTerm("");
+    }
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -40,6 +52,7 @@ function App() {
         placeholder="Search..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        onKeyDown={handleSearch}
       />
       <Routes>
         <Route
