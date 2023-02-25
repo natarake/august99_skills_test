@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import Flight from "./pages/Flight";
@@ -40,15 +40,17 @@ function App() {
     }
   };
 
+  const fetchRef = useRef();
+  fetchRef.current = fetchData;
   useEffect(() => {
-    fetchData();
+    fetchRef.current();
   }, []);
 
   return (
     <div className="p-4 flex flex-col items-center justify-center max-w-[1200px] gap-4">
       <input
         type="text"
-        className="border border-gray-300 p-2 w-full mx-8"
+        className="border border-gray-300 p-2 w-full"
         placeholder="Search..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
