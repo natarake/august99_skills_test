@@ -15,9 +15,6 @@ function Flight() {
     });
   }, [id]);
 
-  console.log(flight);
-  console.log(flight.links?.article_link);
-
   return (
     <div className="bg-white shadow-xl p-4 w-full">
       <div className="relative">
