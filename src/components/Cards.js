@@ -4,7 +4,7 @@ function Cards({ detail }) {
   const status = detail?.launch_success;
   return (
     <div className="w-full p-4 bg-white shadow-2xl rounded-md border border-grey-50">
-      <div className="relative my-2 flex">
+      <div className="my-2 flex">
         <div className="text-xl font-bold">{detail?.mission_name}</div>
         <div className="ml-2">
           <div

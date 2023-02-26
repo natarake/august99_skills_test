@@ -15,6 +15,9 @@ function Flight() {
     });
   }, [id]);
 
+  console.log(flight);
+  console.log(flight.links?.article_link);
+
   return (
     <div className="bg-white shadow-xl p-4 w-full">
       <div className="relative">
@@ -29,11 +32,24 @@ function Flight() {
           className="text-gray-400"
         />
 
-        {/* <a href={flight.links.article_links}>Article</a> */}
         <div>|</div>
-        <div className="text-blue-500 font-bold">Article</div>
+        <a
+          className="text-blue-500 font-bold"
+          href={`${flight.links?.article_link}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Article
+        </a>
         <div>|</div>
-        <div className="text-blue-500 font-bold">Video</div>
+        <a
+          className="text-blue-500 font-bold"
+          href={`${flight.links?.video_link}`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          Video
+        </a>
       </div>
       <div className="flex gap-4 items-center">
         <img
