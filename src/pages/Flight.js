@@ -1,7 +1,7 @@
 import axios from "axios";
+import moment from "moment/moment";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import TimeAgo from "timeago-react";
 
 function Flight() {
   const location = useLocation();
@@ -15,6 +15,8 @@ function Flight() {
     });
   }, [id]);
 
+  const timeago = moment(flight.launch_year).fromNow();
+
   return (
     <div className="bg-white shadow-xl p-4 w-full">
       <div className="relative">
@@ -24,11 +26,7 @@ function Flight() {
         </div>
       </div>
       <div className="flex text-[9px] gap-1">
-        <TimeAgo
-          datetime={flight.launch_date_local}
-          className="text-gray-400"
-        />
-
+        <p className="text-gray-400">{timeago}</p>
         <div>|</div>
         <a
           className="text-blue-500 font-bold"
